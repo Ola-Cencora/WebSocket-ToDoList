@@ -30,8 +30,9 @@ const App = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    addTask({ name: taskName, id: uuidv4() });
-    socket.emit('addTask', { name: taskName, id: uuidv4() });
+    const task = { name: taskName, id: uuidv4() };
+    addTask(task);
+    socket.emit('addTask', task);
     setTaskName("");
   };
 
@@ -40,7 +41,7 @@ const App = () => {
   };
 
   const updateTasks = (updatedTasks) => {
-    setTasks(tasks => [...updatedTasks]);
+    setTasks(tasks => [...tasks, ...updatedTasks]);
   };
 
   return (
